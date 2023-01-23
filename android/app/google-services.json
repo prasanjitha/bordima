@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "95041535486",
+    "project_id": "bordima-45b21",
+    "storage_bucket": "bordima-45b21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95041535486:android:7c1e4d0aee417cfc1e14af",
+        "android_client_info": {
+          "package_name": "com.example.bordima"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95041535486-8b3tp6plqmj61ubp0el17ponku201l8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHo3qQMgXhKKF9meMg_81uJN1fK-Wf8EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95041535486-8b3tp6plqmj61ubp0el17ponku201l8s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
