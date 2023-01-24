@@ -1,6 +1,9 @@
 import 'package:bordima/themes/custom_colors.dart';
 import 'package:bordima/widgets/custom_main_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../authentication/signin_page/signin_page_provider.dart';
 
 class StudentProDetailsPageView extends StatefulWidget {
   const StudentProDetailsPageView({Key? key}) : super(key: key);
@@ -19,6 +22,23 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
           backgroundColor: CustomColors.PRIMARY,
           title: const Text("My Profile"),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () async {
+                FirebaseAuth auth = FirebaseAuth.instance;
+                await auth.signOut();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: ((context) => SignInPageProvider()),
+                  ),
+                );
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: CustomColors.BACKGROUND,
+              ),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(

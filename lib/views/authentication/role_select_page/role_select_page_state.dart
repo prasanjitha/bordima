@@ -2,21 +2,21 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class RoleSelectPageState {
-  final String error;
+  final String role;
 
   const RoleSelectPageState({
-    required this.error,
+    required this.role,
   });
 
   static RoleSelectPageState get initialState {
-    return const RoleSelectPageState(error: '');
+    return const RoleSelectPageState(role: '');
   }
 
   RoleSelectPageState clone({
-    String? error,
+    String? role,
   }) {
     return RoleSelectPageState(
-      error: error ?? this.error,
+      role: role ?? this.role,
     );
   }
 }
