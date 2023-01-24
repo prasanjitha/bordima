@@ -1,13 +1,13 @@
 import 'package:bordima/views/onboarding_pages/main_ob_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'themes/custom_themes.dart';
 import 'views/authentication/forgot_password_page/check_email_page.dart';
 import 'views/authentication/forgot_password_page/forgot_password_page_view.dart';
 import 'views/authentication/role_select_page/role_select_page_view.dart';
 import 'views/authentication/signin_page/signin_page_view.dart';
 import 'views/authentication/signup_page/signup_page_view.dart';
+import 'views/student/student_home_page_tabbar_page/student_home_page_tabbar_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +24,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: CustomThemes.lightTheme(context),
-        home: MainOBScreen());
+        home: CustomerTabBarView());
   }
 }

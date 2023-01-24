@@ -2,6 +2,9 @@ import 'package:bordima/views/student/student_main_home_page/student_main_home_p
 import 'package:flutter/material.dart';
 
 import '../../../themes/custom_colors.dart';
+import '../search_page/search_page_provider.dart';
+import '../student_favorite_bord_page/student_favorite_bord_page_provider.dart';
+import '../student_profile_details_page/student_profile_details_page_provider.dart';
 
 class CustomerTabBarView extends StatefulWidget {
   const CustomerTabBarView({Key? key}) : super(key: key);
@@ -14,9 +17,9 @@ class _CustomerTabBarViewState extends State<CustomerTabBarView> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     StudentMainHomePageProvider(),
-    StudentMainHomePageProvider(),
-    StudentMainHomePageProvider(),
-    StudentMainHomePageProvider(),
+    StudentFavBordPageProvider(),
+    SearchPageProvider(),
+    StudentProDetailsPageProvider(),
   ];
 
   void onTabTapped(int index) {
@@ -80,15 +83,15 @@ class _CustomerTabBarViewState extends State<CustomerTabBarView> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.list_alt_rounded,
+                Icons.favorite_border_rounded,
               ),
-              label: 'Products',
+              label: 'Favorite',
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.shopping_bag_outlined,
+                Icons.search,
               ),
-              label: 'My Orders',
+              label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(
