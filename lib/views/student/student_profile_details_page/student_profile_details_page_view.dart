@@ -217,7 +217,7 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
                     // ),
                     CustomLineInputField(
                       textEditingController: bloc.emailTextEditingController,
-                      lable: 'Email',
+                      lable: 'Email Address',
                       hintText: 'sagara45@gmail.com',
                     ),
                   ],
