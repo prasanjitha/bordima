@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../authentication/signin_page/signin_page_provider.dart';
+import 'get_province/get_province_bloc.dart';
 import 'student_profile_details_page_bloc.dart';
 
 class StudentProDetailsPageView extends StatefulWidget {
@@ -18,6 +19,18 @@ class StudentProDetailsPageView extends StatefulWidget {
 }
 
 class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
+  var currentSelectedValue;
+  List<String> gender = [
+    "Central Province",
+    "Eastern Province",
+    "Northern Province",
+    "Southern Province",
+    "Western Province",
+    "North Western Province",
+    "North Central Province ",
+    "Uva Province ",
+    "Sabaragamuwa Province",
+  ];
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -114,6 +127,7 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
                       ))
                 ]),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomLineInputField(
                       textEditingController:
@@ -126,12 +140,72 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
                       lable: 'Last Name',
                       hintText: 'Rathnayake',
                     ),
-                    CustomLineInputField(
-                      textEditingController: bloc.provinceTextEditingController,
-                      lable: 'Province',
-                      hintText: 'Westren Province',
+                    Text(
+                      'Update your province',
+                      style: Theme.of(context).textTheme.headline4!.copyWith(
+                            fontSize: 16.0,
+                            color: CustomColors.SECONDARY,
+                            fontWeight: FontWeight.normal,
+                          ),
+                      textAlign: TextAlign.start,
                     ),
+                    BlocBuilder<GetProvinceBloc, GetProvinceState>(
+                      builder: (context, state) {
+                        return InputDecorator(
+                          decoration: InputDecoration(
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: CustomColors.PRIMARY),
+                            ),
+                            errorStyle: const TextStyle(fontSize: 0.012),
+                            hintText: '',
+                            isDense: true,
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(1, 2, 0, 0),
+                            hintStyle: Theme.of(context).textTheme.subtitle1,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: CustomColors.PRIMARY, width: 2.0),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              hint: Text(
+                                '',
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                              value: currentSelectedValue,
+                              isDense: true,
+                              isExpanded: true,
+                              onChanged: (String? newValue) {
+                                setState(
+                                  () {
+                                    currentSelectedValue = newValue!;
+                                    context.read<GetProvinceBloc>().add(
+                                        GetMyProvinceEvent(
+                                            currentSelectedValue));
+                                  },
+                                );
+                              },
+                              items: gender.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    // CustomLineInputField(
+                    //   textEditingController: bloc.provinceTextEditingController,
+                    //   lable: 'Province',
+                    //   hintText: 'Westren Province',
+                    // ),
                     CustomLineInputField(
+                      maxLength: 20,
                       textEditingController: bloc.townTextEditingController,
                       lable: 'City',
                       hintText: 'Kalutara',
@@ -143,7 +217,7 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
                     // ),
                     CustomLineInputField(
                       textEditingController: bloc.emailTextEditingController,
-                      lable: 'Email',
+                      lable: 'Email Address',
                       hintText: 'sagara45@gmail.com',
                     ),
                   ],
@@ -162,11 +236,13 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
 class CustomLineInputField extends StatelessWidget {
   final String lable;
   final String hintText;
+  final int maxLength;
   final TextEditingController textEditingController;
   const CustomLineInputField({
     required this.hintText,
     required this.lable,
     required this.textEditingController,
+    this.maxLength = 15,
     Key? key,
   }) : super(key: key);
 
@@ -183,7 +259,7 @@ class CustomLineInputField extends StatelessWidget {
         // ),
         TextFormField(
           controller: textEditingController,
-          maxLength: 15,
+          maxLength: maxLength,
           decoration: InputDecoration(
             hintText: hintText,
           ),

@@ -40,16 +40,19 @@ class StudentProDetailsPageBloc
             firstName: snapshot.data()['FirstName'],
             lastName: snapshot.data()['LastName'],
             email: snapshot.data()['email'],
-            province: 'Update your province',
-            town: 'Update your distric',
+            province: snapshot.data()['province'],
+            town: snapshot.data()['town'],
           );
           student.add(model);
         }
         log(student.toString());
         firstNameTextEditingController.text = student[0].firstName;
         lastNameTextEditingController.text = student[0].lastName;
-        provinceTextEditingController.text = student[0].province;
-        townTextEditingController.text = student[0].town;
+        provinceTextEditingController.text = student[0].province.isEmpty
+            ? 'Update your province'
+            : student[0].province;
+        townTextEditingController.text =
+            student[0].town.isEmpty ? 'Update your town' : student[0].town;
         emailTextEditingController.text = student[0].email;
       } catch (e) {
         return Future.error(e.toString());
