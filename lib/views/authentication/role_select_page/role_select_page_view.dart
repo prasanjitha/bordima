@@ -2,6 +2,7 @@ import 'package:bordima/widgets/custom_main_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../widgets/custom_main_appbar.dart';
+import '../signup_page/signup_page_provider.dart';
 
 class RoleSelectPageView extends StatefulWidget {
   const RoleSelectPageView({Key? key}) : super(key: key);
@@ -36,11 +37,31 @@ class _RoleSelectPageViewState extends State<RoleSelectPageView> {
               ),
               Column(
                 children: [
-                  CustomMainButton(tap: () {}, btnText: 'Student'),
+                  CustomMainButton(
+                      tap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: ((context) => SignUpPageProvider(
+                                  role: 'STUDENT',
+                                )),
+                          ),
+                        );
+                      },
+                      btnText: 'Student'),
                   const SizedBox(
                     height: 20.0,
                   ),
-                  CustomMainButton(tap: () {}, btnText: 'Boarding owner'),
+                  CustomMainButton(
+                      tap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: ((context) => SignUpPageProvider(
+                                  role: 'BOARDING_OWNER',
+                                )),
+                          ),
+                        );
+                      },
+                      btnText: 'Boarding owner'),
                   const SizedBox(
                     height: 20.0,
                   ),

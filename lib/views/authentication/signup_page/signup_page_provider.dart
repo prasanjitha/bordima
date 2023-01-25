@@ -5,10 +5,11 @@ import 'signup_page_bloc.dart';
 import 'signup_page_view.dart';
 
 class SignUpPageProvider extends BlocProvider<SignUpPageBloc> {
-  SignUpPageProvider({Key? key})
+  final String role;
+  SignUpPageProvider({required this.role, Key? key})
       : super(
           key: key,
-          create: (context) => SignUpPageBloc(context),
+          create: (context) => SignUpPageBloc(context, role),
           child: const SignUpPageView(),
         );
 }

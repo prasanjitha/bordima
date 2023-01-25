@@ -1,4 +1,5 @@
 import 'package:bordima/views/authentication/forgot_password_page/forgot_password_page_provider.dart';
+import 'package:bordima/views/authentication/role_select_page/role_select_page_provider.dart';
 import 'package:bordima/views/main_home_page/main_home_page_provider.dart';
 import 'package:bordima/widgets/custom_main_button.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import '../../../widgets/custom_main_appbar.dart';
 import '../../../widgets/custom_text_field.dart';
 import '../../student/student_home_page_tabbar_page/student_home_page_tabbar_view.dart';
 import '../../student/student_main_home_page/student_main_home_page_view.dart';
+import '../signup_page/signup_page_provider.dart';
 
 class SignInPageView extends StatefulWidget {
   const SignInPageView({Key? key}) : super(key: key);
@@ -29,7 +31,13 @@ class _SignInPageViewState extends State<SignInPageView> {
         preferredSize: const Size.fromHeight(60),
         child: CustomAppBar(
           title: 'Sign up',
-          tap: () {},
+          tap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: ((context) => RoleSelectPageProvider()),
+              ),
+            );
+          },
         ),
       ),
       body: Padding(
@@ -92,14 +100,15 @@ class _SignInPageViewState extends State<SignInPageView> {
                   height: 20.0,
                 ),
                 CustomMainButton(
-                    tap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: ((context) => CustomerTabBarView()),
-                        ),
-                      );
-                    },
-                    btnText: 'Sign In')
+                  tap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: ((context) => const CustomerTabBarView()),
+                      ),
+                    );
+                  },
+                  btnText: 'Sign In',
+                ),
               ],
             ),
           ],

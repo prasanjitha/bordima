@@ -1,4 +1,5 @@
 import 'package:bordima/themes/custom_colors.dart';
+import 'package:bordima/views/authentication/role_select_page/role_select_page_provider.dart';
 import 'package:bordima/views/authentication/signup_page/signup_page_provider.dart';
 import 'package:bordima/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class MainOBScreen extends StatelessWidget {
                 tap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: ((context) => SignUpPageProvider()),
+                      builder: ((context) => RoleSelectPageProvider()),
                     ),
                   );
                 },
