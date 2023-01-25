@@ -1,6 +1,8 @@
 import 'package:bordima/views/onboarding_pages/main_ob_page.dart';
+import 'package:bordima/views/student/student_profile_details_page/get_province/get_province_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'themes/custom_themes.dart';
 import 'views/authentication/forgot_password_page/check_email_page.dart';
 import 'views/authentication/forgot_password_page/forgot_password_page_view.dart';
@@ -21,9 +23,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: CustomThemes.lightTheme(context),
-        home: MainOBScreen());
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => GetProvinceBloc(context)),
+        ],
+        child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: CustomThemes.lightTheme(context),
+            home: MainOBScreen()));
   }
 }

@@ -53,9 +53,11 @@ class SignUpPageBloc extends Bloc<SignUpPageEvent, SignUpPageState> {
         user.updateDisplayName(firstName + lastName);
         await firestore.collection('users').doc(auth.currentUser!.uid).set({
           "FirstName": firstName,
-          "LastName": firstName,
+          "LastName": lastName,
           "role": role,
           "email": email,
+          "province": '',
+          "town": '',
           "userId": auth.currentUser!.uid
         });
         return user;
