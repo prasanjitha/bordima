@@ -1,9 +1,13 @@
 import 'package:bordima/themes/custom_colors.dart';
+import 'package:bordima/views/student/student_profile_details_page/student_profile_details_page_event.dart';
+import 'package:bordima/views/student/student_profile_details_page/student_profile_details_page_state.dart';
 import 'package:bordima/widgets/custom_main_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../authentication/signin_page/signin_page_provider.dart';
+import 'student_profile_details_page_bloc.dart';
 
 class StudentProDetailsPageView extends StatefulWidget {
   const StudentProDetailsPageView({Key? key}) : super(key: key);
@@ -17,6 +21,8 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+    final StudentProDetailsPageBloc bloc =
+        BlocProvider.of<StudentProDetailsPageBloc>(context);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: CustomColors.PRIMARY,
@@ -50,48 +56,93 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
                   Container(
                     width: width,
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(80), // Image border
-                    child: SizedBox.fromSize(
-                      // Image radius
-                      child: Image.network(
-                        'https://cdn.pixabay.com/photo/2018/03/12/12/32/woman-3219507_960_720.jpg',
-                        width: 160.0,
-                        height: 160.0,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                  BlocBuilder<StudentProDetailsPageBloc,
+                      StudentProDetailsPageState>(
+                    buildWhen: (previous, current) =>
+                        previous.isLoading != current.isLoading,
+                    builder: (context, state) {
+                      if (state.isLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (state.imageUrl.isNotEmpty) {
+                        return ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(80), // Image border
+                          child: SizedBox.fromSize(
+                            // Image radius
+                            child: Image.network(
+                              state.imageUrl,
+                              width: 160.0,
+                              height: 160.0,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      }
+                      return InkWell(
+                        onTap: () {
+                          bloc.add(UploadImageEvent());
+                        },
+                        child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(80), // Image border
+                          child: SizedBox.fromSize(
+                            // Image radius
+                            child: Image.network(
+                              'https://cdn.pixabay.com/photo/2018/03/12/12/32/woman-3219507_960_720.jpg',
+                              width: 160.0,
+                              height: 160.0,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                  const Positioned(
+                  Positioned(
                       right: 20,
-                      child: Icon(
-                        Icons.edit,
-                        color: CustomColors.PRIMARY,
+                      child: InkWell(
+                        onTap: () {
+                          bloc.add(UploadImageEvent());
+                        },
+                        child: const Icon(
+                          Icons.edit,
+                          color: CustomColors.PRIMARY,
+                        ),
                       ))
                 ]),
                 Column(
-                  children: const [
+                  children: [
                     CustomLineInputField(
+                      textEditingController:
+                          bloc.firstNameTextEditingController,
                       lable: 'First Name',
                       hintText: 'Mr.Sagara',
                     ),
                     CustomLineInputField(
+                      textEditingController: bloc.lastNameTextEditingController,
                       lable: 'Last Name',
                       hintText: 'Rathnayake',
                     ),
                     CustomLineInputField(
+                      textEditingController: bloc.provinceTextEditingController,
                       lable: 'Province',
                       hintText: 'Westren Province',
                     ),
                     CustomLineInputField(
+                      textEditingController: bloc.townTextEditingController,
                       lable: 'City',
                       hintText: 'Kalutara',
                     ),
+                    // CustomLineInputField(
+
+                    //   lable: 'Mobile',
+                    //   hintText: '+94 768934456',
+                    // ),
                     CustomLineInputField(
-                      lable: 'Mobile',
-                      hintText: '+94 768934456',
-                    ),
-                    CustomLineInputField(
+                      textEditingController: bloc.emailTextEditingController,
                       lable: 'Email',
                       hintText: 'sagara45@gmail.com',
                     ),
@@ -111,9 +162,11 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
 class CustomLineInputField extends StatelessWidget {
   final String lable;
   final String hintText;
+  final TextEditingController textEditingController;
   const CustomLineInputField({
     required this.hintText,
     required this.lable,
+    required this.textEditingController,
     Key? key,
   }) : super(key: key);
 
@@ -129,6 +182,7 @@ class CustomLineInputField extends StatelessWidget {
         //       ),
         // ),
         TextFormField(
+          controller: textEditingController,
           maxLength: 15,
           decoration: InputDecoration(
             hintText: hintText,
