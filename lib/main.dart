@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bordima/views/authentication/signin_page/signin_page_provider.dart';
+import 'package:bordima/views/bordOwner/add_boarding_page/add_boarding_page_provider.dart';
 import 'package:bordima/views/bordOwner/board_owner_home_page/board_owner_home_page_provider.dart';
 import 'package:bordima/views/onboarding_pages/main_ob_page.dart';
 import 'package:bordima/views/student/student_main_home_page/student_main_home_page_provider.dart';
@@ -17,6 +18,7 @@ import 'views/authentication/role_select_page/role_select_page_view.dart';
 import 'views/authentication/root/root.dart';
 import 'views/authentication/signin_page/signin_page_view.dart';
 import 'views/authentication/signup_page/signup_page_view.dart';
+import 'views/bordOwner/add_boarding_page/add_boarding_page_view.dart';
 import 'views/bordOwner/bord_owner_tabbar_view/boad_owner_home_page_tabbar_view.dart';
 import 'views/student/student_home_page_tabbar_page/student_home_page_tabbar_view.dart';
 
@@ -45,10 +47,10 @@ class MyApp extends StatelessWidget {
             theme: CustomThemes.lightTheme(context),
             home:
                 snapshot.hasData && snapshot.data.toString() == 'BOARDING_OWNER'
-                    ? const BordOwnerTabBarView()
+                    ? AddBoardingPageProvider()
                     : snapshot.hasData
-                        ? const CustomerTabBarView()
-                        : SignInPageProvider(),
+                        ? AddBoardingPageProvider()
+                        : AddBoardingPageProvider(),
           ),
         );
       }),
