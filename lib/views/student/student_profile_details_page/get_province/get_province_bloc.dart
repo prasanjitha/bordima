@@ -10,5 +10,9 @@ class GetProvinceBloc extends Bloc<GetProvinceEvent, GetProvinceState> {
       log(event.province);
       emit(state.clone(province: event.province));
     });
+    on<GetMyBoardingTypeEvent>((event, emit) {
+      log(event.type);
+      emit(state.clone(boardingType: event.type));
+    });
   }
 }
