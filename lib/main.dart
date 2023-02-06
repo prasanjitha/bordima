@@ -47,10 +47,10 @@ class MyApp extends StatelessWidget {
             theme: CustomThemes.lightTheme(context),
             home:
                 snapshot.hasData && snapshot.data.toString() == 'BOARDING_OWNER'
-                    ? AddBoardingPageProvider()
+                    ? SignInPageProvider()
                     : snapshot.hasData
-                        ? AddBoardingPageProvider()
-                        : AddBoardingPageProvider(),
+                        ? SignInPageProvider()
+                        : SignInPageProvider(),
           ),
         );
       }),

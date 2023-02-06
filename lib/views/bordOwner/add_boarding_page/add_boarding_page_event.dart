@@ -25,3 +25,5 @@ class SubmitBoardingData extends AddBoardingPageEvent {
     required this.province,
   });
 }
+
+class PressButton extends AddBoardingPageEvent {}

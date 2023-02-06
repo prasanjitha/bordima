@@ -1,3 +1,4 @@
+import 'package:bordima/views/bordOwner/add_boarding_page/add_boarding_page_provider.dart';
 import 'package:bordima/views/student/student_main_home_page/student_main_home_page_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _CustomerTabBarViewState extends State<CustomerTabBarView> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     StudentMainHomePageProvider(),
-    StudentFavBordPageProvider(),
+    AddBoardingPageProvider(),
     SearchPageProvider(),
     StudentProDetailsPageProvider(),
   ];
