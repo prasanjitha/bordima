@@ -7,6 +7,7 @@ import 'package:bordima/widgets/custom_main_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../themes/custom_colors.dart';
 import '../../authentication/signin_page/signin_page_provider.dart';
@@ -315,7 +316,7 @@ class _AddBoardingPageViewState extends State<AddBoardingPageView> {
                                               currentSelectBoarding = newValue!;
                                               context
                                                   .read<GetProvinceBloc>()
-                                                  .add(GetMyProvinceEvent(
+                                                  .add(GetMyBoardingTypeEvent(
                                                       currentSelectBoarding));
                                             },
                                           );
@@ -363,23 +364,22 @@ class _AddBoardingPageViewState extends State<AddBoardingPageView> {
                       builder: (context, state) {
                         return CustomMainButton(
                           tap: () {
-                            // bloc.add(SubmitBoardingData(
-                            //   boardingName: bloc
-                            //       .boardingNameTextEditingController.text
-                            //       .trim(),
-                            //   boardingPrice:
-                            //       bloc.priceTextEditingController.text.trim(),
-                            //   boardingType: provinceBloc.state.province,
-                            //   city: bloc.cityTextEditingController.text.trim(),
-                            //   description:
-                            //       bloc.descriptionTextEditingController.text.trim(),
-                            //   images: bloc.state.allUrls,
-                            //   mobile: bloc.mobileTextEditingController.text.trim(),
-                            //   province: provinceBloc.state.province,
-                            // ));
-                            log(bloc.mobileTextEditingController.text);
-                            log(provinceBloc.state.boardingType);
-                            log(bloc.state.allUrls.toString());
+                            bloc.add(SubmitBoardingData(
+                              boardingName: bloc
+                                  .boardingNameTextEditingController.text
+                                  .trim(),
+                              boardingPrice:
+                                  bloc.priceTextEditingController.text.trim(),
+                              boardingType: provinceBloc.state.boardingType,
+                              city: bloc.cityTextEditingController.text.trim(),
+                              description: bloc
+                                  .descriptionTextEditingController.text
+                                  .trim(),
+                              images: bloc.state.allUrls,
+                              mobile:
+                                  bloc.mobileTextEditingController.text.trim(),
+                              province: provinceBloc.state.province,
+                            ));
                           },
                           btnText: 'Add',
                         );

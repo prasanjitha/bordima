@@ -1,11 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
-
+import 'package:uuid/uuid.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:uuid/uuid.dart';
+
 import 'add_boarding_page_event.dart';
 import 'add_boarding_page_state.dart';
 
@@ -22,6 +24,8 @@ class AddBoardingPageBloc
       : super(AddBoardingPageState.initialState) {
     final storageRef = FirebaseStorage.instance.ref();
     ImagePicker picker = ImagePicker();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    FirebaseAuth auth = FirebaseAuth.instance;
     on<UploadImageEvent>((event, emit) async {
       var uuid = const Uuid();
       try {
@@ -48,6 +52,27 @@ class AddBoardingPageBloc
         }
       } catch (e) {
         return Future.error(e.toString());
+      }
+    });
+    on<SubmitBoardingData>((event, emit) async {
+      try {
+        var uuid = const Uuid();
+        if (auth.currentUser != null) {
+          await firestore.collection('boardings').doc(uuid.v4()).set({
+            "boardingId": uuid.v4(),
+            "boardingUserId": auth.currentUser!.uid,
+            "images": event.images,
+            "boardingName": event.boardingName,
+            "province": event.province,
+            "city": event.city,
+            "mobile": event.mobile,
+            "boardingType": event.boardingType,
+            "boardingPrice": event.boardingPrice,
+            "description": event.description,
+          });
+        }
+      } catch (e) {
+        return Future.error('Something went wrong! $e');
       }
     });
   }
