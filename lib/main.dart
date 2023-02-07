@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bordima/views/Testing_concepts/providers/provider_example.dart';
 import 'package:bordima/views/authentication/signin_page/signin_page_provider.dart';
 import 'package:bordima/views/bordOwner/add_boarding_page/add_boarding_page_provider.dart';
 import 'package:bordima/views/bordOwner/board_owner_home_page/board_owner_home_page_provider.dart';
@@ -47,10 +48,10 @@ class MyApp extends StatelessWidget {
             theme: CustomThemes.lightTheme(context),
             home:
                 snapshot.hasData && snapshot.data.toString() == 'BOARDING_OWNER'
-                    ? SignInPageProvider()
+                    ? BDOwnerHomePageProvider()
                     : snapshot.hasData
-                        ? SignInPageProvider()
-                        : SignInPageProvider(),
+                        ? BDOwnerHomePageProvider()
+                        : BDOwnerHomePageProvider(),
           ),
         );
       }),
