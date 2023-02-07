@@ -143,6 +143,7 @@ class VerticleHotelItemCard extends StatelessWidget {
   final String bordName;
   final String bordLocation;
   final String priceForRoom;
+  final bool isBordigOwner;
 
   const VerticleHotelItemCard({
     this.isAvailable = true,
@@ -150,6 +151,7 @@ class VerticleHotelItemCard extends StatelessWidget {
     required this.bordName,
     required this.imageUrl,
     required this.priceForRoom,
+    this.isBordigOwner = false,
     Key? key,
   }) : super(key: key);
 
@@ -230,15 +232,22 @@ class VerticleHotelItemCard extends StatelessWidget {
                           fontSize: 14,
                         ),
                   ),
-                  Row(
-                    children: [
-                      const ViewDetailsButton(),
-                      const SizedBox(width: 20.0),
-                      BookNowButton(
-                        isAvailable: isAvailable,
-                      ),
-                    ],
-                  )
+                  isBordigOwner
+                      ? Row(
+                          children: const [
+                            SizedBox(width: 110.0),
+                            ViewDetailsButton(),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            const ViewDetailsButton(),
+                            const SizedBox(width: 20.0),
+                            BookNowButton(
+                              isAvailable: isAvailable,
+                            ),
+                          ],
+                        )
                 ],
               ),
             )
