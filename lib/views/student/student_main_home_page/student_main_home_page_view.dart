@@ -1,9 +1,11 @@
 import 'package:bordima/themes/custom_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/boarding.dart';
 import '../../../widgets/custom_carousel_slider.dart';
 import '../../../widgets/custom_searchbar.dart';
 import '../../../widgets/custom_student_title.dart';
+import '../../bordOwner/boarding_details_page/boarding_details_page_view.dart';
 import '../bording_details_page/bording_details_page_view.dart';
 
 class StudentMainHomePageView extends StatefulWidget {
@@ -104,29 +106,29 @@ class _StudentMainHomePageViewState extends State<StudentMainHomePageView> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const VerticleHotelItemCard(
-                    imageUrl:
-                        'https://thumbs.dreamstime.com/b/hotel-room-beautiful-orange-sofa-included-43642330.jpg',
-                    bordLocation: 'Moratuwa',
-                    bordName: 'Sithmi bording',
-                    priceForRoom: '5000',
-                  ),
-                  const VerticleHotelItemCard(
-                    imageUrl:
-                        'https://2.imimg.com/data2/SI/TS/MY-3125576/lemon_tree_hotel_single-room-500x500.jpg',
-                    bordLocation: 'Piliyandala',
-                    bordName: 'Shenu bording',
-                    priceForRoom: '6000',
-                    isAvailable: false,
-                  ),
-                  const VerticleHotelItemCard(
-                    imageUrl:
-                        'https://viatravelers.com/wp-content/uploads/2021/01/single-hotel-room.jpg.webp',
-                    bordLocation: 'Piliyandala',
-                    bordName: 'Vishmi bording',
-                    priceForRoom: '6000',
-                    isAvailable: true,
-                  ),
+                  // const VerticleHotelItemCard(
+                  //   imageUrl:
+                  //       'https://thumbs.dreamstime.com/b/hotel-room-beautiful-orange-sofa-included-43642330.jpg',
+                  //   bordLocation: 'Moratuwa',
+                  //   bordName: 'Sithmi bording',
+                  //   priceForRoom: '5000',
+                  // ),
+                  // const VerticleHotelItemCard(
+                  //   imageUrl:
+                  //       'https://2.imimg.com/data2/SI/TS/MY-3125576/lemon_tree_hotel_single-room-500x500.jpg',
+                  //   bordLocation: 'Piliyandala',
+                  //   bordName: 'Shenu bording',
+                  //   priceForRoom: '6000',
+                  //   isAvailable: false,
+                  // ),
+                  // const VerticleHotelItemCard(
+                  //   imageUrl:
+                  //       'https://viatravelers.com/wp-content/uploads/2021/01/single-hotel-room.jpg.webp',
+                  //   bordLocation: 'Piliyandala',
+                  //   bordName: 'Vishmi bording',
+                  //   priceForRoom: '6000',
+                  //   isAvailable: true,
+                  // ),
                 ],
               ),
             ),
@@ -144,6 +146,7 @@ class VerticleHotelItemCard extends StatelessWidget {
   final String bordLocation;
   final String priceForRoom;
   final bool isBordigOwner;
+  final BoardModel board;
 
   const VerticleHotelItemCard({
     this.isAvailable = true,
@@ -152,6 +155,7 @@ class VerticleHotelItemCard extends StatelessWidget {
     required this.imageUrl,
     required this.priceForRoom,
     this.isBordigOwner = false,
+    required this.board,
     Key? key,
   }) : super(key: key);
 
@@ -234,14 +238,18 @@ class VerticleHotelItemCard extends StatelessWidget {
                   ),
                   isBordigOwner
                       ? Row(
-                          children: const [
-                            SizedBox(width: 110.0),
-                            ViewDetailsButton(),
+                          children: [
+                            const SizedBox(width: 110.0),
+                            ViewDetailsButton(
+                              board: board,
+                            ),
                           ],
                         )
                       : Row(
                           children: [
-                            const ViewDetailsButton(),
+                            ViewDetailsButton(
+                              board: board,
+                            ),
                             const SizedBox(width: 20.0),
                             BookNowButton(
                               isAvailable: isAvailable,
@@ -259,7 +267,9 @@ class VerticleHotelItemCard extends StatelessWidget {
 }
 
 class ViewDetailsButton extends StatelessWidget {
+  final BoardModel board;
   const ViewDetailsButton({
+    required this.board,
     Key? key,
   }) : super(key: key);
 
@@ -269,7 +279,9 @@ class ViewDetailsButton extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: ((context) => const BordingDetailsPageView()),
+            builder: ((context) => BoardingDetailsPageView(
+                  board: board,
+                )),
           ),
         );
       },

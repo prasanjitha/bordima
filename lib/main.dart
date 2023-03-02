@@ -20,6 +20,7 @@ import 'views/authentication/root/root.dart';
 import 'views/authentication/signin_page/signin_page_view.dart';
 import 'views/authentication/signup_page/signup_page_view.dart';
 import 'views/bordOwner/add_boarding_page/add_boarding_page_view.dart';
+import 'views/bordOwner/board_owner_profile_page/board_owner_profile_page_bloc.dart';
 import 'views/bordOwner/bord_owner_tabbar_view/boad_owner_home_page_tabbar_view.dart';
 import 'views/student/student_home_page_tabbar_page/student_home_page_tabbar_view.dart';
 
@@ -42,16 +43,17 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => GetProvinceBloc(context)),
+            BlocProvider(create: (context) => BWProfilePageBloc(context)),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',
             theme: CustomThemes.lightTheme(context),
             home:
                 snapshot.hasData && snapshot.data.toString() == 'BOARDING_OWNER'
-                    ? BDOwnerHomePageProvider()
-                    : snapshot.hasData
-                        ? BDOwnerHomePageProvider()
-                        : BDOwnerHomePageProvider(),
+                    ? BordOwnerTabBarView()
+                    : snapshot.hasData && snapshot.data.toString() == 'STUDENT'
+                        ? CustomerTabBarView()
+                        : SignInPageProvider(),
           ),
         );
       }),

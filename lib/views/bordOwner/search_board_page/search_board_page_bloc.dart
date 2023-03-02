@@ -1,17 +1,17 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:bordima/models/boarding.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'myBoarding_page_event.dart';
-import 'myBoarding_page_state.dart';
+import '../../../models/boarding.dart';
+import 'search_board_page_event.dart';
+import 'search_board_page_state.dart';
 
-class MyBoardingPageBloc
-    extends Bloc<MyBoardingPageEvent, MyBoardingPageState> {
-  MyBoardingPageBloc(BuildContext context)
-      : super(MyBoardingPageState.initialState) {
+class SearchBoardPageBloc
+    extends Bloc<SearchBoardPageEvent, SearchBoardPageState> {
+  SearchBoardPageBloc(BuildContext context)
+      : super(SearchBoardPageState.initialState) {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     on<InitEvent>((event, emit) async {
@@ -36,12 +36,22 @@ class MyBoardingPageBloc
               mobile: snapshot.data()['mobile'],
               province: snapshot.data()['province'],
             );
-
             board.add(model);
           }
         }
-        log(board.toString());
-        emit(state.clone(isLoading: false, myBoards: board));
+        emit(state.clone(isLoading: false, searchBoard: board));
+      } catch (e) {
+        return Future.error(e.toString());
+      }
+    });
+    on<SearchBoardPlaceEvent>((event, emit) async {
+      try {
+        emit(state.clone(isLoading: true));
+        List<BoardModel> found = [];
+        found = state.searchBoard
+            .where((element) => element.boardingName == event.name)
+            .toList();
+        emit(state.clone(isLoading: false, foundBoard: found));
       } catch (e) {
         return Future.error(e.toString());
       }
