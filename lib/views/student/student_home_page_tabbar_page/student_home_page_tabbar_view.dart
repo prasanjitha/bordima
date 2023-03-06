@@ -3,6 +3,7 @@ import 'package:bordima/views/student/student_main_home_page/student_main_home_p
 import 'package:flutter/material.dart';
 
 import '../../../themes/custom_colors.dart';
+import '../favorite_board_page/favorite_board_page_provider.dart';
 import '../search_page/search_page_provider.dart';
 import '../student_favorite_bord_page/student_favorite_bord_page_provider.dart';
 import '../student_profile_details_page/student_profile_details_page_provider.dart';
@@ -18,7 +19,7 @@ class _CustomerTabBarViewState extends State<CustomerTabBarView> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     StudentMainHomePageProvider(),
-    AddBoardingPageProvider(),
+    FavoriteBoardPageProvider(),
     SearchPageProvider(),
     StudentProDetailsPageProvider(),
   ];

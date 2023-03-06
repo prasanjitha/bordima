@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:bordima/models/student.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,6 +28,8 @@ class StudentProDetailsPageBloc
       : super(StudentProDetailsPageState.initialState) {
     final storageRef = FirebaseStorage.instance.ref();
     ImagePicker picker = ImagePicker();
+    FirebaseAuth auth = FirebaseAuth.instance;
+
     on<InitEvent>((event, emit) async {
       try {
         List<Student> student = [];
@@ -34,16 +37,18 @@ class StudentProDetailsPageBloc
         var querySnapshots = await collection.get();
         log(querySnapshots.docs.toString());
         for (var snapshot in querySnapshots.docs) {
-          Student model = Student(
-            documentId: snapshot.id,
-            studentId: snapshot.data()['userId'],
-            firstName: snapshot.data()['FirstName'],
-            lastName: snapshot.data()['LastName'],
-            email: snapshot.data()['email'],
-            province: snapshot.data()['province'],
-            town: snapshot.data()['town'],
-          );
-          student.add(model);
+          if (auth.currentUser!.uid == snapshot.data()['userId']) {
+            Student model = Student(
+              documentId: snapshot.id,
+              studentId: snapshot.data()['userId'],
+              firstName: snapshot.data()['FirstName'],
+              lastName: snapshot.data()['LastName'],
+              email: snapshot.data()['email'],
+              province: snapshot.data()['province'],
+              town: snapshot.data()['town'],
+            );
+            student.add(model);
+          }
         }
         log(student.toString());
         firstNameTextEditingController.text = student[0].firstName;
