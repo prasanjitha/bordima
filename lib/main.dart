@@ -7,6 +7,7 @@ import 'package:bordima/views/bordOwner/board_owner_home_page/board_owner_home_p
 import 'package:bordima/views/onboarding_pages/main_ob_page.dart';
 import 'package:bordima/views/student/student_main_home_page/student_main_home_page_provider.dart';
 import 'package:bordima/views/student/student_profile_details_page/get_province/get_province_bloc.dart';
+import 'package:bordima/views/student/student_profile_details_page/student_profile_details_page_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,6 +45,8 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => GetProvinceBloc(context)),
             BlocProvider(create: (context) => BWProfilePageBloc(context)),
+            BlocProvider(
+                create: (context) => StudentProDetailsPageBloc(context)),
           ],
           child: MaterialApp(
             title: 'Flutter Demo',

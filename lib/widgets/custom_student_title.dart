@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../themes/custom_colors.dart';
+import '../views/student/student_profile_details_page/student_profile_details_page_bloc.dart';
 
 class CustomStudentTitle extends StatelessWidget {
   const CustomStudentTitle({
@@ -9,6 +11,8 @@ class CustomStudentTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final StudentProDetailsPageBloc bloc =
+        BlocProvider.of<StudentProDetailsPageBloc>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -16,7 +20,7 @@ class CustomStudentTitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hello Prasanjith',
+              'Hello ${bloc.firstNameTextEditingController.text}',
               style: Theme.of(context).textTheme.headline4!.copyWith(
                     fontSize: 18,
                     color: CustomColors.SECONDARY,

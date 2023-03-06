@@ -1,7 +1,6 @@
 import 'package:bordima/models/boarding.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 import '../../../themes/custom_colors.dart';
 import '../bord_owner_tabbar_view/boad_owner_home_page_tabbar_view.dart';
 
