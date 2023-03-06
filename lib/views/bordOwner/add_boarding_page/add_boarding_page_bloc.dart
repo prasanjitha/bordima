@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../bord_owner_tabbar_view/boad_owner_home_page_tabbar_view.dart';
 import 'add_boarding_page_event.dart';
 import 'add_boarding_page_state.dart';
 
@@ -55,6 +56,7 @@ class AddBoardingPageBloc
       }
     });
     on<SubmitBoardingData>((event, emit) async {
+      log('message');
       try {
         var uuid = const Uuid();
         if (auth.currentUser != null) {
@@ -71,6 +73,11 @@ class AddBoardingPageBloc
             "description": event.description,
           });
         }
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: ((context) => const BordOwnerTabBarView()),
+          ),
+        );
       } catch (e) {
         return Future.error('Something went wrong! $e');
       }

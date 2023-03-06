@@ -1,8 +1,14 @@
 import 'package:bordima/views/bordOwner/board_owner_home_page/board_owner_home_page_provider.dart';
+import 'package:bordima/views/bordOwner/my_boarding_page/myBoarding_page_provider.dart';
 import 'package:bordima/views/student/student_main_home_page/student_main_home_page_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../themes/custom_colors.dart';
+import '../../student/student_profile_details_page/student_profile_details_page_provider.dart';
+import '../add_boarding_page/add_boarding_page_provider.dart';
+import '../board_owner_profile_page/board_owner_profile_page_provider.dart';
+import '../my_boarding_page/myBoarding_page_view.dart';
+import '../search_board_page/search_board_page_provider.dart';
 
 class BordOwnerTabBarView extends StatefulWidget {
   const BordOwnerTabBarView({Key? key}) : super(key: key);
@@ -15,9 +21,11 @@ class _BordOwnerTabBarViewState extends State<BordOwnerTabBarView> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     BDOwnerHomePageProvider(),
-    BDOwnerHomePageProvider(),
-    BDOwnerHomePageProvider(),
-    BDOwnerHomePageProvider(),
+    MyBoardingPageProvider(),
+    SearchBoardPageProvider(
+      type: 'tab',
+    ),
+    BWProfilePageProvider(),
   ];
 
   void onTabTapped(int index) {
@@ -29,6 +37,7 @@ class _BordOwnerTabBarViewState extends State<BordOwnerTabBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: EdgeInsets.only(top: 10),
@@ -39,11 +48,11 @@ class _BordOwnerTabBarViewState extends State<BordOwnerTabBarView> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: ((context) => AddNewItemPageProvider()),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => AddBoardingPageProvider()),
+                ),
+              );
             },
             child: Container(
               height: 75,

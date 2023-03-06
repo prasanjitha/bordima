@@ -1,24 +1,26 @@
-import 'package:bordima/themes/custom_colors.dart';
-import 'package:bordima/views/student/student_profile_details_page/student_profile_details_page_event.dart';
-import 'package:bordima/views/student/student_profile_details_page/student_profile_details_page_state.dart';
-import 'package:bordima/widgets/custom_main_button.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:bordima/views/bordOwner/board_owner_profile_page/board_owner_profile_page_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../themes/custom_colors.dart';
+import '../../../widgets/custom_main_button.dart';
 import '../../authentication/signin_page/signin_page_provider.dart';
-import 'get_province/get_province_bloc.dart';
-import 'student_profile_details_page_bloc.dart';
+import '../../student/student_profile_details_page/get_province/get_province_bloc.dart';
+import '../../student/student_profile_details_page/student_profile_details_page_view.dart';
+import 'board_owner_profile_page_bloc.dart';
+import 'board_owner_profile_page_event.dart';
 
-class StudentProDetailsPageView extends StatefulWidget {
-  const StudentProDetailsPageView({Key? key}) : super(key: key);
+class BWProfilePageView extends StatefulWidget {
+  const BWProfilePageView({Key? key}) : super(key: key);
 
   @override
-  _StudentProDetailsPageViewState createState() =>
-      _StudentProDetailsPageViewState();
+  _BWProfilePageViewState createState() => _BWProfilePageViewState();
 }
 
-class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
+class _BWProfilePageViewState extends State<BWProfilePageView> {
   var currentSelectedValue;
   List<String> gender = [
     "Central Province",
@@ -34,8 +36,7 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    final StudentProDetailsPageBloc bloc =
-        BlocProvider.of<StudentProDetailsPageBloc>(context);
+    final BWProfilePageBloc bloc = BlocProvider.of<BWProfilePageBloc>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: CustomColors.PRIMARY,
@@ -69,8 +70,7 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
                 Container(
                   width: width,
                 ),
-                BlocBuilder<StudentProDetailsPageBloc,
-                    StudentProDetailsPageState>(
+                BlocBuilder<BWProfilePageBloc, BWProfilePageState>(
                   buildWhen: (previous, current) =>
                       previous.isLoading != current.isLoading,
                   builder: (context, state) {
@@ -224,42 +224,6 @@ class _StudentProDetailsPageViewState extends State<StudentProDetailsPageView> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomLineInputField extends StatelessWidget {
-  final String lable;
-  final String hintText;
-  final int maxLength;
-  final TextEditingController textEditingController;
-  const CustomLineInputField({
-    required this.hintText,
-    required this.lable,
-    required this.textEditingController,
-    this.maxLength = 15,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Text(
-        //   lable,
-        //   style: Theme.of(context).textTheme.headline4!.copyWith(
-        //         fontSize: 16,
-        //       ),
-        // ),
-        TextFormField(
-          controller: textEditingController,
-          maxLength: maxLength,
-          decoration: InputDecoration(
-            hintText: hintText,
-          ),
-        ),
-      ],
     );
   }
 }
