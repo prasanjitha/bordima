@@ -19,7 +19,7 @@ class _FavoriteBoardPageViewState extends State<FavoriteBoardPageView> {
         centerTitle: true,
       ),
       body: const Center(
-          child: Text("Home Page View with boarding owner new changes for apis")),
+          child: Text("Home Page View with boarding owner new changes for apis change")),
     );
   }
 }
