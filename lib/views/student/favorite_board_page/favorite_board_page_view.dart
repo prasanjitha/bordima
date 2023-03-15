@@ -18,8 +18,7 @@ class _FavoriteBoardPageViewState extends State<FavoriteBoardPageView> {
         title: const Text("My Favorites"),
         centerTitle: true,
       ),
-      body: const Center(
-          child: Text("Home Page View with boarding owner new changes for apis change")),
+      body: const Center(child: Text("Chat message screen")),
     );
   }
 }
