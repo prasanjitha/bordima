@@ -44,7 +44,7 @@ class CustomCircularProgressIndicator extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 25.0),
                   child: Center(
                     child: Text(
-                      "Please wait...",
+                      "Please wait",
                       style: Theme.of(context).textTheme.headline5,
                     ),
                   ),
