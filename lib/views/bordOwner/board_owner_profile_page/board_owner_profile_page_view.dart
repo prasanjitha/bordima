@@ -1,17 +1,17 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bordima/views/bordOwner/board_owner_profile_page/board_owner_profile_page_state.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../themes/custom_colors.dart';
-import '../../../widgets/custom_main_button.dart';
-import '../../authentication/signin_page/signin_page_provider.dart';
-import '../../student/student_profile_details_page/get_province/get_province_bloc.dart';
-import '../../student/student_profile_details_page/student_profile_details_page_view.dart';
 import 'board_owner_profile_page_bloc.dart';
 import 'board_owner_profile_page_event.dart';
+import '../../../widgets/custom_main_button.dart';
+import '../../../widgets/custom_line_input_field.dart';
+import '../../authentication/signin_page/signin_page_provider.dart';
+import '../../student/student_profile_details_page/get_province/get_province_bloc.dart';
+import 'package:bordima/views/bordOwner/board_owner_profile_page/board_owner_profile_page_state.dart';
 
 class BWProfilePageView extends StatefulWidget {
   const BWProfilePageView({Key? key}) : super(key: key);
@@ -130,7 +130,7 @@ class _BWProfilePageViewState extends State<BWProfilePageView> {
                   CustomLineInputField(
                     textEditingController: bloc.firstNameTextEditingController,
                     lable: 'First Name',
-                    hintText: 'Mr.Sagara',
+                    hintText: 'Mr.Kasun',
                   ),
                   CustomLineInputField(
                     textEditingController: bloc.lastNameTextEditingController,
@@ -193,22 +193,12 @@ class _BWProfilePageViewState extends State<BWProfilePageView> {
                       );
                     },
                   ),
-                  // CustomLineInputField(
-                  //   textEditingController: bloc.provinceTextEditingController,
-                  //   lable: 'Province',
-                  //   hintText: 'Westren Province',
-                  // ),
                   CustomLineInputField(
                     maxLength: 20,
                     textEditingController: bloc.townTextEditingController,
                     lable: 'City',
                     hintText: 'Kalutara',
                   ),
-                  // CustomLineInputField(
-
-                  //   lable: 'Mobile',
-                  //   hintText: '+94 768934456',
-                  // ),
                   CustomLineInputField(
                     textEditingController: bloc.emailTextEditingController,
                     lable: 'Email Address',

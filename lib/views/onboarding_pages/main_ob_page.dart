@@ -1,11 +1,9 @@
-import 'package:bordima/themes/custom_colors.dart';
-import 'package:bordima/views/authentication/role_select_page/role_select_page_provider.dart';
-import 'package:bordima/views/authentication/signup_page/signup_page_provider.dart';
-import 'package:bordima/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_main_button.dart';
+import 'package:bordima/widgets/custom_text_button.dart';
 import '../authentication/signin_page/signin_page_provider.dart';
+import 'package:bordima/views/authentication/role_select_page/role_select_page_provider.dart';
 
 class MainOBScreen extends StatelessWidget {
   const MainOBScreen({Key? key}) : super(key: key);

@@ -1,16 +1,12 @@
-import 'package:bordima/views/bordOwner/board_owner_home_page/board_owner_home_page_state.dart';
-import 'package:bordima/widgets/custom_board_owner_title.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../themes/custom_colors.dart';
-import '../../../widgets/custom_carousel_slider.dart';
-import '../../../widgets/custom_searchbar.dart';
-import '../../../widgets/custom_student_title.dart';
-import '../../authentication/signin_page/signin_page_provider.dart';
-import '../../student/student_main_home_page/student_main_home_page_view.dart';
 import 'board_owner_home_page_bloc.dart';
+import '../../../widgets/custom_searchbar.dart';
+import '../../../widgets/custom_carousel_slider.dart';
+import 'package:bordima/widgets/custom_board_owner_title.dart';
+import '../../student/student_main_home_page/student_main_home_page_view.dart';
+import 'package:bordima/views/bordOwner/board_owner_home_page/board_owner_home_page_state.dart';
 
 class BDOwnerHomePageView extends StatefulWidget {
   const BDOwnerHomePageView({Key? key}) : super(key: key);

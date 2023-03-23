@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:bordima/models/boarding.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,7 +18,6 @@ class MyBoardingPageBloc
         List<BoardModel> board = [];
         var collection = FirebaseFirestore.instance.collection('boardings');
         var querySnapshots = await collection.get();
-        log(querySnapshots.docs.toString());
         for (var snapshot in querySnapshots.docs) {
           if (auth.currentUser!.uid == snapshot.data()['boardingUserId']) {
             BoardModel model = BoardModel(
@@ -40,7 +37,6 @@ class MyBoardingPageBloc
             board.add(model);
           }
         }
-        log(board.toString());
         emit(state.clone(isLoading: false, myBoards: board));
       } catch (e) {
         return Future.error(e.toString());
