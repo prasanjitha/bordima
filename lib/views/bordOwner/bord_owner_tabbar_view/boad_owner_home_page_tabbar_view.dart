@@ -1,13 +1,10 @@
 import 'package:bordima/views/bordOwner/board_owner_home_page/board_owner_home_page_provider.dart';
 import 'package:bordima/views/bordOwner/my_boarding_page/myBoarding_page_provider.dart';
-import 'package:bordima/views/student/student_main_home_page/student_main_home_page_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../themes/custom_colors.dart';
-import '../../student/student_profile_details_page/student_profile_details_page_provider.dart';
 import '../add_boarding_page/add_boarding_page_provider.dart';
 import '../board_owner_profile_page/board_owner_profile_page_provider.dart';
-import '../my_boarding_page/myBoarding_page_view.dart';
 import '../search_board_page/search_board_page_provider.dart';
 
 class BordOwnerTabBarView extends StatefulWidget {
@@ -62,7 +59,7 @@ class _BordOwnerTabBarViewState extends State<BordOwnerTabBarView> {
                 shape: BoxShape.circle,
                 color: CustomColors.PRIMARY,
               ),
-              child: Icon(Icons.add, size: 40),
+              child: const Icon(Icons.add, size: 40),
             ),
           ),
         ),

@@ -1,12 +1,10 @@
-import 'package:bordima/views/bordOwner/add_boarding_page/add_boarding_page_provider.dart';
-import 'package:bordima/views/student/student_main_home_page/student_main_home_page_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../themes/custom_colors.dart';
-import '../favorite_board_page/favorite_board_page_provider.dart';
 import '../search_page/search_page_provider.dart';
-import '../student_favorite_bord_page/student_favorite_bord_page_provider.dart';
+import '../favorite_board_page/favorite_board_page_provider.dart';
 import '../student_profile_details_page/student_profile_details_page_provider.dart';
+import 'package:bordima/views/student/student_main_home_page/student_main_home_page_provider.dart';
 
 class CustomerTabBarView extends StatefulWidget {
   const CustomerTabBarView({Key? key}) : super(key: key);
@@ -33,35 +31,6 @@ class _CustomerTabBarViewState extends State<CustomerTabBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // floatingActionButton: Padding(
-      //   padding: EdgeInsets.only(top: 10),
-      //   child: SizedBox(
-      //     height: 60,
-      //     width: 60,
-      //     child: FloatingActionButton(
-      //       backgroundColor: Colors.transparent,
-      //       elevation: 0,
-      //       onPressed: () {
-      //         Navigator.of(context).push(
-      //           MaterialPageRoute(
-      //             builder: ((context) => AddNewItemPageProvider()),
-      //           ),
-      //         );
-      //       },
-      //       child: Container(
-      //         height: 75,
-      //         width: 75,
-      //         decoration: BoxDecoration(
-      //           border: Border.all(color: Colors.white, width: 4),
-      //           shape: BoxShape.circle,
-      //           color: CustomColors.PRIMARY,
-      //         ),
-      //         child: Icon(Icons.add, size: 40),
-      //       ),
-      //     ),
-      //   ),
-      // ),
       body: _children[_currentIndex],
       bottomNavigationBar: SizedBox(
         height: 70.0,

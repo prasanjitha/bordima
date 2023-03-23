@@ -1,11 +1,10 @@
-import 'package:bordima/views/bordOwner/my_boarding_page/myBoarding_page_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'myBoarding_page_bloc.dart';
 import '../../../themes/custom_colors.dart';
 import '../boarding_details_page/boarding_details_page_view.dart';
-import 'myBoarding_page_bloc.dart';
+import 'package:bordima/views/bordOwner/my_boarding_page/myBoarding_page_state.dart';
 
 class MyBoardingPageView extends StatefulWidget {
   const MyBoardingPageView({Key? key}) : super(key: key);

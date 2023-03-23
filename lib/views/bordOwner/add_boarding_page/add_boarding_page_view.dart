@@ -1,16 +1,12 @@
-import 'dart:developer';
-
 import 'package:bordima/views/bordOwner/add_boarding_page/add_boarding_page_bloc.dart';
 import 'package:bordima/views/bordOwner/add_boarding_page/add_boarding_page_event.dart';
 import 'package:bordima/views/bordOwner/add_boarding_page/add_boarding_page_state.dart';
 import 'package:bordima/widgets/custom_main_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../themes/custom_colors.dart';
-import '../../authentication/signin_page/signin_page_provider.dart';
+import '../../../widgets/custom_line_text_field.dart';
 import '../../student/student_profile_details_page/get_province/get_province_bloc.dart';
 
 class AddBoardingPageView extends StatefulWidget {
@@ -391,27 +387,6 @@ class _AddBoardingPageViewState extends State<AddBoardingPageView> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CustomLineTextField extends StatelessWidget {
-  final String title;
-  final TextEditingController textEditingController;
-  const CustomLineTextField({
-    required this.title,
-    required this.textEditingController,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: textEditingController,
-      decoration: InputDecoration(
-        hintText: title,
-        contentPadding: const EdgeInsets.only(bottom: 10),
       ),
     );
   }

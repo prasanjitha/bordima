@@ -1,5 +1,4 @@
 import 'package:bordima/themes/custom_colors.dart';
-import 'package:bordima/views/student/student_boarding_details_page/student_boarding_details_page_view.dart';
 import 'package:bordima/views/student/student_main_home_page/student_main_home_page_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,8 @@ import '../../../widgets/custom_carousel_slider.dart';
 import '../../../widgets/custom_searchbar.dart';
 import '../../../widgets/custom_student_title.dart';
 import '../../bordOwner/boarding_details_page/boarding_details_page_view.dart';
-import '../bording_details_page/bording_details_page_view.dart';
+import '../student_boarding_details_page/student_boarding_details_page_provider.dart';
+import '../student_profile_details_page/student_profile_details_page_bloc.dart';
 import 'student_main_home_page_bloc.dart';
 
 class StudentMainHomePageView extends StatefulWidget {
@@ -25,6 +25,8 @@ class _StudentMainHomePageViewState extends State<StudentMainHomePageView> {
   Widget build(BuildContext context) {
     final StudentMainHomePageBloc bloc =
         BlocProvider.of<StudentMainHomePageBloc>(context);
+    final StudentProDetailsPageBloc stuBloc =
+        BlocProvider.of<StudentProDetailsPageBloc>(context);
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
@@ -87,7 +89,7 @@ class _StudentMainHomePageViewState extends State<StudentMainHomePageView> {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: ((context) =>
-                                          StudentBoardingDetailsPageView(
+                                          StudentBoardingDetailsPageProvider(
                                               board: state.allBoarding[index])),
                                     ),
                                   );
@@ -117,19 +119,20 @@ class _StudentMainHomePageViewState extends State<StudentMainHomePageView> {
                       return SizedBox(
                         height: 1000.0,
                         child: ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: state.allBoarding.length,
-                            itemBuilder: (context, index) {
-                              return VerticleHotelItemCard(
-                                role: 'STUDENT',
-                                board: state.allBoarding[index],
-                                imageUrl: state.allBoarding[index].images[1],
-                                bordLocation: state.allBoarding[index].city,
-                                bordName: state.allBoarding[index].boardingName,
-                                priceForRoom:
-                                    state.allBoarding[index].boardingPrice,
-                              );
-                            }),
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.allBoarding.length,
+                          itemBuilder: (context, index) {
+                            return VerticleHotelItemCard(
+                              role: 'STUDENT',
+                              board: state.allBoarding[index],
+                              imageUrl: state.allBoarding[index].images[1],
+                              bordLocation: state.allBoarding[index].city,
+                              bordName: state.allBoarding[index].boardingName,
+                              priceForRoom:
+                                  state.allBoarding[index].boardingPrice,
+                            );
+                          },
+                        ),
                       );
                     },
                   ),
@@ -290,7 +293,7 @@ class ViewDetailsButton extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: ((context) => role == 'STUDENT'
-                ? StudentBoardingDetailsPageView(board: board)
+                ? StudentBoardingDetailsPageProvider(board: board)
                 : BoardingDetailsPageView(
                     board: board,
                   )),

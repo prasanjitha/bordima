@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:bordima/themes/custom_colors.dart';
 import 'package:bordima/views/bordOwner/search_board_page/search_board_page_bloc.dart';
 import 'package:bordima/views/bordOwner/search_board_page/search_board_page_event.dart';
 import 'package:bordima/views/bordOwner/search_board_page/search_board_page_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 
 import '../boarding_details_page/boarding_details_page_view.dart';
 import '../my_boarding_page/myBoarding_page_view.dart';

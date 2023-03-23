@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../themes/custom_colors.dart';
 import 'student_profile_details_page_event.dart';
 import 'student_profile_details_page_state.dart';
 
@@ -24,6 +25,7 @@ class StudentProDetailsPageBloc
       TextEditingController();
   final TextEditingController townTextEditingController =
       TextEditingController();
+  String profileUrl = '';
   StudentProDetailsPageBloc(BuildContext context)
       : super(StudentProDetailsPageState.initialState) {
     final storageRef = FirebaseStorage.instance.ref();
@@ -32,6 +34,7 @@ class StudentProDetailsPageBloc
 
     on<InitEvent>((event, emit) async {
       try {
+        emit(state.clone(isLoading: true));
         List<Student> student = [];
         var collection = FirebaseFirestore.instance.collection('users');
         var querySnapshots = await collection.get();
@@ -39,7 +42,7 @@ class StudentProDetailsPageBloc
         for (var snapshot in querySnapshots.docs) {
           if (auth.currentUser!.uid == snapshot.data()['userId']) {
             Student model = Student(
-              documentId: snapshot.id,
+              documentId: snapshot.data()['profileUrl'],
               studentId: snapshot.data()['userId'],
               firstName: snapshot.data()['FirstName'],
               lastName: snapshot.data()['LastName'],
@@ -59,6 +62,10 @@ class StudentProDetailsPageBloc
         townTextEditingController.text =
             student[0].town.isEmpty ? 'Update your town' : student[0].town;
         emailTextEditingController.text = student[0].email;
+        log('message');
+        log(student[0].documentId);
+        profileUrl = student[0].documentId;
+        emit(state.clone(isLoading: false));
       } catch (e) {
         return Future.error(e.toString());
       }
@@ -79,6 +86,26 @@ class StudentProDetailsPageBloc
           log(url.toString());
           emit(state.clone(isLoading: false, imageUrl: url));
         }
+      } catch (e) {
+        return Future.error(e.toString());
+      }
+    });
+    on<UpdateUserDataEvent>((event, emit) {
+      try {
+        emit(state.clone(isUploading: true));
+        String propicUrl = state.imageUrl.isEmpty ? profileUrl : state.imageUrl;
+        var collection = FirebaseFirestore.instance.collection('users');
+        collection.doc(auth.currentUser!.uid).update({
+          'province': event.province,
+          'FirstName': event.firstName,
+          'LastName': event.lastName,
+          'town': event.city,
+          'profileUrl': propicUrl,
+        });
+        var snackBar = const SnackBar(
+            backgroundColor: CustomColors.PRIMARY, content: Text('Updated!'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        emit(state.clone(isUploading: false));
       } catch (e) {
         return Future.error(e.toString());
       }
